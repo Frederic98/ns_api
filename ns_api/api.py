@@ -144,6 +144,7 @@ class NSAPI:
         resp = requests.get(url, auth=(self.usr, self.passwd))
         if resp.status_code == 400:
             raise RuntimeError('Couldn\'t authenticate at server')
+        resp.encoding = 'utf-8'
         data = ElementTree.fromstring(resp.text)
         if data.tag == 'error':
             raise RuntimeError(data.findtext('message'))
