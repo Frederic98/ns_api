@@ -1,5 +1,4 @@
 from collections import namedtuple
-from enum import Enum
 from datetime import datetime
 from xml.etree import ElementTree
 import pickle
@@ -90,7 +89,7 @@ class Station:
     names = StationNames('', '', '')
     country = StationCountry.UNKNOWN
     UICCode = 0
-    location = StationLocation(0,0)
+    location = StationLocation(0, 0)
     synonyms = []
 
     def __init__(self, **kwargs):
@@ -126,6 +125,9 @@ class Station:
         self.UICCode = int(tree.findtext('UICCode'))
         self.synonyms = [s.text for s in tree.find('Synoniemen').findall('Synoniem')]
         return self
+
+    def __str__(self):
+        return self.names.long
 
 
 ####################
