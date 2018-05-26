@@ -126,6 +126,10 @@ class Station:
         self.synonyms = [s.text for s in tree.find('Synoniemen').findall('Synoniem')]
         return self
 
+    @property
+    def identifiers(self):
+        return {self.code, *self.names, *self.synonyms}
+
     def __str__(self):
         return self.names.long
 
@@ -158,6 +162,12 @@ class NSAPI:
         for departure in resp:
             departures.append(Departure.from_xml(departure))
         return departures
+
+    def get_station(self, station):
+        station = station.lower()
+        for s in self.stations:
+            if station in [i.lower() for i in s.identifiers]:
+                return s
 
     def load_stations(self, file):
         self.stations.clear()
