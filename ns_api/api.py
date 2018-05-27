@@ -1,12 +1,13 @@
 from collections import namedtuple
-from datetime import datetime
+from datetime import datetime, timedelta
+from typing import Union, List
 from xml.etree import ElementTree
 import pickle
 import requests
 from requests.compat import urljoin
 
-from . import strftime, strptime, Delay                     # Time things
-from . import StationType, StationCountry, Train, Carrier   # Enums
+from . import strftime, strptime, Delay, Duration                    # Time things
+from . import StationType, StationCountry, Train, Carrier, Status   # Enums
 
 
 #########################
@@ -134,6 +135,103 @@ class Station:
         return self.names.long
 
 
+################
+# Notification #
+################
+class Notification:
+    id = ''
+    serious = False
+    text = ''
+
+    def __init__(self, id, serious, text):
+        self.id = id
+        self.serious = serious
+        self.text = text
+
+    @classmethod
+    def from_xml(cls, tree: ElementTree.Element):
+        id = tree.findtext('Id')
+        serious = tree.findtext('Ernstig') == 'true'
+        text = tree.findtext('Text')
+        return cls(id, serious, text)
+
+
+###########
+# Journey #
+###########
+class Journey:
+    notifications = []
+    transfers = 0
+    duration_planned = timedelta()
+    duration_actual = timedelta()
+    optimal = False
+    departure_time_planned = datetime.utcfromtimestamp(0)
+    departure_time_actual = datetime.utcfromtimestamp(0)
+    arrival_time_planned = datetime.utcfromtimestamp(0)
+    arrival_time_actual = datetime.utcfromtimestamp(0)
+    status = Status.UNKNOWN
+    parts = []      # type: List(JourneyPart)
+
+    def __init__(self, **kwargs):
+        for key, value in kwargs:
+            setattr(self, key, value)
+
+    @classmethod
+    def from_xml(cls, tree: ElementTree.Element):
+        self = cls()
+        self.notifications = [Notification.from_xml(notif) for notif in tree.findall('Melding')]
+        self.transfers = int(tree.findtext('AantalOverstappen'))
+        self.duration_planned = Duration(tree.findtext('GeplandeReisTijd'))
+        self.duration_actual = Duration(tree.findtext('ActueleReisTijd'))
+        self.optimal = tree.findtext('Optimaal') == 'true'
+        self.departure_time_planned = strptime(tree.findtext('GeplandeVertrekTijd'))
+        self.departure_time_actual = strptime(tree.findtext('ActueleVertrekTijd'))
+        self.arrival_time_planned = strptime(tree.findtext('GeplandeAankomstTijd'))
+        self.arrival_time_actual = strptime(tree.findtext('ActueleAankomstTijd'))
+        self.status = Status(tree.findtext('Status'))
+        self.parts = [JourneyPart.from_xml(part) for part in tree.findall('ReisDeel')]
+        return self
+
+
+class JourneyPart:
+    carrier = Carrier.UNKNOWN
+    train_type = Train.UNKNOWN
+    ride_number = 0
+    status = Status.UNKNOWN
+    stops = []      # type: List(JourneyStop)
+
+    def __init__(self, **kwargs):
+        for key, value in kwargs:
+            setattr(self, key, value)
+
+    @classmethod
+    def from_xml(cls, tree: ElementTree.Element):
+        self = cls()
+        self.carrier = Carrier(tree.findtext('Vervoerder'))
+        self.train_type = Train(tree.findtext('VervoerType'))
+        self.ride_number = int(tree.findtext('RitNummer'))
+        self.status = Status(tree.findtext('Status'))
+        self.stops = []
+        for stop in tree.findall('ReisStop'):
+            self.stops.append(JourneyStop(stop.findtext('Naam'), stop.findtext('Tijd'), stop.findtext('Spoor')))
+        return self
+
+
+class JourneyStop:
+    station = ''        # type: Union(str, Station)
+    time = datetime.utcfromtimestamp(0)
+    track = Track(None)
+
+    def __init__(self, station, time, track=None):
+        self.station = station
+        if isinstance(time, str):
+            time = strptime(time)
+        self.time = time
+        if not isinstance(track, Track):
+            track = Track(track)
+        self.track = track
+
+
 ####################
 # NS API interface #
 ####################
@@ -163,7 +261,25 @@ class NSAPI:
             departures.append(Departure.from_xml(departure))
         return departures
 
-    def get_station(self, station):
+    def get_journey(self, from_station, to_station, via_station=None,
+                    past_advices=None, next_advices=None, time=None, time_departure=True,
+                    hsl_allow=True, yearcard=False):
+        url = 'ns-api-treinplanner?'
+        keymap = {'fromStation': from_station,
+                  'toStation': to_station,
+                  'viaStation': via_station,
+                  'previousAdvices': past_advices,
+                  'nextAdvices': next_advices,
+                  'dateTime': time,
+                  'Departure': time_departure,
+                  'hslAllowed': hsl_allow,
+                  'yearCArd': yearcard}
+        url += '&'.join(['{}={}'.format(key,val) for key,val in keymap.items() if val is not None])
+        resp = self.request(url)
+        options = [Journey.from_xml(option) for option in resp]
+        return options
+
+    def get_station(self, station) -> Station:
         station = station.lower()
         for s in self.stations:
             if station in [i.lower() for i in s.identifiers]:

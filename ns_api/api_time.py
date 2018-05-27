@@ -1,15 +1,28 @@
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 
-FORMAT = '%Y-%m-%dT%H:%M:%S%z'
+DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S%z'
+DURATION_REGEX = re.compile(r'(\d+):(\d\d)')
 
 
 def strptime(txt: str):
-    return datetime.strptime(txt, FORMAT)
+    return datetime.strptime(txt, DATETIME_FORMAT)
 
 
 def strftime(dt: datetime):
-    return dt.strftime(FORMAT)
+    return dt.strftime(DATETIME_FORMAT)
+
+
+class Duration(int):
+    def __new__(cls, txt):
+        match = DURATION_REGEX.match(txt)
+        if match is None:
+            raise ValueError('No valid duration text')
+        minutes = int(match.group(1))*60 + int(match.group(2))
+        self = int.__new__(cls, minutes)
+        self.minutes = minutes % 60
+        self.hours = minutes // 60
+        return self
 
 
 class Delay(int):
