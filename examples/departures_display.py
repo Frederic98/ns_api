@@ -114,8 +114,9 @@ class DepartureDisplay(QWidget):
                 departures.extend([None for n in range(self.n_departures-len(departures))])
             except:
                 departures = [None for n in range(self.n_departures)]
-            self.new_departures.emit(departures)
-            self.departures = departures
+            if departures != self.departures:
+                self.new_departures.emit(departures)
+                self.departures = departures
             time.sleep(self.update_time)
 
     def update_departures(self, departures):

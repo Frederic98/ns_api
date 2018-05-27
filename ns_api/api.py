@@ -21,6 +21,12 @@ class Track(str):
         self.changed = changed
         return self
 
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
 
 class Departure:
     ride_number = 0
@@ -75,6 +81,12 @@ class Departure:
         if remarks is not None:
             self.remarks = '\n'.join([rem.text.strip() for rem in remarks.findall('Opmerking')])
         return self
+
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
 
 #######################
@@ -134,6 +146,12 @@ class Station:
     def __str__(self):
         return self.names.long
 
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
 
 ################
 # Notification #
@@ -154,6 +172,12 @@ class Notification:
         serious = tree.findtext('Ernstig') == 'true'
         text = tree.findtext('Text')
         return cls(id, serious, text)
+
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
 
 ###########
@@ -192,6 +216,12 @@ class Journey:
         self.parts = [JourneyPart.from_xml(part) for part in tree.findall('ReisDeel')]
         return self
 
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
 
 class JourneyPart:
     carrier = Carrier.UNKNOWN
@@ -216,6 +246,12 @@ class JourneyPart:
             self.stops.append(JourneyStop(stop.findtext('Naam'), stop.findtext('Tijd'), stop.findtext('Spoor')))
         return self
 
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
 
 class JourneyStop:
     station = ''        # type: Union(str, Station)
@@ -230,6 +266,12 @@ class JourneyStop:
         if not isinstance(track, Track):
             track = Track(track)
         self.track = track
+
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
 
 ####################
