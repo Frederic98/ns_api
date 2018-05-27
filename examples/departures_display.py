@@ -70,7 +70,15 @@ class DepartureWidget(QWidget):
             self.time.setText(self.departure.departure_time.strftime('%H:%M'))
             self.delay.setText(self.departure.departure_delay.friendly)
             self.destination.setText(self.departure.destination)
-            self.route.setText('via ' + self.departure.route if self.departure.route else '')
+            if self.departure.remarks:
+                self.route.setText(self.departure.remarks)
+                self.route.setPalette(color_red)
+            elif self.departure.journy_hint:
+                self.route.setText(self.departure.journy_hint)
+                self.route.setPalette(color_red)
+            else:
+                self.route.setText('via ' + self.departure.route if self.departure.route else '')
+                self.route.setPalette(color_blue)
             self.track.setText(self.departure.departure_track.upper())
             self.track.setPalette(color_red if self.departure.departure_track.changed else color_blue)
             carrier = str(self.departure.carrier) if self.departure.carrier is not ns.Carrier.UNKNOWN else ''
