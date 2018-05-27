@@ -11,9 +11,10 @@ from PyQt5.QtWidgets import QVBoxLayout, QGridLayout
 big_font = QFont('Times', 15, QFont.Bold)
 small_font = QFont('Times', 10, QFont.Bold)
 small_font_metrics = QFontMetrics(small_font)
-color = QPalette()
-color.setColor(QPalette.Text, Qt.darkBlue)
-color.setColor(QPalette.WindowText, Qt.darkBlue)
+color_blue = QPalette()
+color_blue.setColor(QPalette.WindowText, Qt.darkBlue)
+color_red = QPalette()
+color_red.setColor(QPalette.WindowText, Qt.darkRed)
 background_white = QPalette()
 background_white.setColor(QPalette.Window, Qt.white)
 background_light = QPalette()
@@ -22,13 +23,13 @@ background_light.setColor(QPalette.Window, QColor(185, 220, 255))
 
 def big_font_label(*args, **kwargs):
     lbl = QLabel(*args, font=big_font, **kwargs)
-    lbl.setPalette(color)
+    lbl.setPalette(color_blue)
     return lbl
 
 
 def small_font_label(*args, **kwargs):
     lbl = QLabel(*args, font=small_font, **kwargs)
-    lbl.setPalette(color)
+    lbl.setPalette(color_blue)
     return lbl
 
 
@@ -44,6 +45,7 @@ class DepartureWidget(QWidget):
         self.time = big_font_label()
         self.time.setFixedWidth(70)
         self.delay = small_font_label()
+        self.delay.setPalette(color_red)
         self.destination = big_font_label()
         self.route = small_font_label()
         self.track = big_font_label()
