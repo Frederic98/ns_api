@@ -21,6 +21,7 @@ class Train(nsEnum):
     ICE_INTERNATIONAL = 'ICE International'
     THALYS = 'Thalys'
     STOPBUS = 'Stopbus i.p.v. trein'
+    METRO = 'Metro'
     UNKNOWN = 'Unknown'
 
 
@@ -29,6 +30,7 @@ class Carrier(nsEnum):
     NS_INTERNATIONAL = 'NS International'
     ARRIVA = 'Arriva'
     BLAUWNET = 'Blauwnet'
+    GVB = 'GVB'
     UNKNOWN = 'Unknown'
 
 
