@@ -72,6 +72,7 @@ class DepartureWidget(QWidget):
             self.destination.setText(self.departure.destination)
             self.route.setText('via ' + self.departure.route if self.departure.route else '')
             self.track.setText(self.departure.departure_track.upper())
+            self.track.setPalette(color_red if self.departure.departure_track.changed else color_blue)
             carrier = str(self.departure.carrier) if self.departure.carrier is not ns.Carrier.UNKNOWN else ''
             train = str(self.departure.train_type) if self.departure.train_type is not ns.Train.UNKNOWN else ''
             sep = '\n' if small_font_metrics.width(carrier + ' ' + train) > self.carrier.width() else ' '
