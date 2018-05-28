@@ -15,6 +15,8 @@ color_blue = QPalette()
 color_blue.setColor(QPalette.WindowText, Qt.darkBlue)
 color_red = QPalette()
 color_red.setColor(QPalette.WindowText, Qt.darkRed)
+color_gray = QPalette()
+color_gray.setColor(QPalette.WindowText, Qt.gray)
 background_white = QPalette()
 background_white.setColor(QPalette.Window, Qt.white)
 background_light = QPalette()
@@ -61,9 +63,10 @@ class DepartureWidget(QWidget):
         self.layout.addWidget(self.carrier, 0, 3, 2, 1)
 
     def update_departure(self, departure):
-        self.departure = departure
-        self.update_information()
-        self.update()
+        if departure != self.departure:
+            self.departure = departure
+            self.update_information()
+            self.update()
 
     def update_information(self):
         if self.departure is not None:
@@ -85,9 +88,17 @@ class DepartureWidget(QWidget):
             train = str(self.departure.train_type) if self.departure.train_type is not ns.Train.UNKNOWN else ''
             sep = '\n' if small_font_metrics.width(carrier + ' ' + train) > self.carrier.width() else ' '
             self.carrier.setText(carrier + sep + train)
+            if self.departure.remarks and 'Rijdt vandaag niet' in self.departure.remarks:
+                self.foreach_widget(lambda elm: elm.setPalette(color_gray), [self.route])
+            else:
+                self.foreach_widget(lambda elm: elm.setPalette(color_blue), [self.route])
         else:
-            for elm in (self.time, self.delay, self.destination, self.route, self.track, self.carrier):
-                elm.setText('')
+            self.foreach_widget(lambda elm: elm.setText(''))
+
+    def foreach_widget(self, func, not_elms=None):
+        for elm in (self.time, self.delay, self.destination, self.route, self.track, self.carrier):
+            if not_elms is None or elm not in not_elms:
+                func(elm)
 
 
 class DepartureDisplay(QWidget):
