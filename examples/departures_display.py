@@ -43,6 +43,7 @@ class DepartureWidget(QWidget):
         self.layout = QGridLayout(self)
         self.setAutoFillBackground(True)
         self.setPalette(background_white if index % 2 else background_light)
+        self.canceled = False
 
         self.time = big_font_label()
         self.time.setFixedWidth(70)
@@ -70,35 +71,36 @@ class DepartureWidget(QWidget):
 
     def update_information(self):
         if self.departure is not None:
+            self.canceled = self.departure.remarks and 'Rijdt vandaag niet' in self.departure.remarks
+
             self.time.setText(self.departure.departure_time.strftime('%H:%M'))
+            self.set_colorhint(self.time, color_blue)
             self.delay.setText(self.departure.departure_delay.friendly)
+            self.set_colorhint(self.delay, color_red)
             self.destination.setText(self.departure.destination)
+            self.set_colorhint(self.destination, color_blue)
             if self.departure.remarks:
                 self.route.setText(self.departure.remarks)
                 self.route.setPalette(color_red)
             elif self.departure.journy_hint:
                 self.route.setText(self.departure.journy_hint)
-                self.route.setPalette(color_red)
+                self.set_colorhint(self.route, color_red)
             else:
                 self.route.setText('via ' + self.departure.route if self.departure.route else '')
-                self.route.setPalette(color_blue)
+                self.set_colorhint(self.route, color_blue)
             self.track.setText(self.departure.departure_track.upper())
-            self.track.setPalette(color_red if self.departure.departure_track.changed else color_blue)
+            self.set_colorhint(self.track, color_red if self.departure.departure_track.changed else color_blue)
             carrier = str(self.departure.carrier) if self.departure.carrier is not ns.Carrier.UNKNOWN else ''
             train = str(self.departure.train_type) if self.departure.train_type is not ns.Train.UNKNOWN else ''
             sep = '\n' if small_font_metrics.width(carrier + ' ' + train) > self.carrier.width() else ' '
             self.carrier.setText(carrier + sep + train)
-            if self.departure.remarks and 'Rijdt vandaag niet' in self.departure.remarks:
-                self.foreach_widget(lambda elm: elm.setPalette(color_gray), [self.route])
-            else:
-                self.foreach_widget(lambda elm: elm.setPalette(color_blue), [self.route])
+            self.set_colorhint(self.carrier, color_blue)
         else:
-            self.foreach_widget(lambda elm: elm.setText(''))
+            for elm in (self.time, self.delay, self.destination, self.route, self.track, self.carrier):
+                elm.setText('')
 
-    def foreach_widget(self, func, not_elms=None):
-        for elm in (self.time, self.delay, self.destination, self.route, self.track, self.carrier):
-            if not_elms is None or elm not in not_elms:
-                func(elm)
+    def set_colorhint(self, widget: QWidget, color):
+        widget.setPalette(color_gray if self.canceled else color)
 
 
 class DepartureDisplay(QWidget):
