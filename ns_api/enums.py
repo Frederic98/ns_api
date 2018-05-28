@@ -4,6 +4,9 @@ from enum import Enum
 class nsEnum(Enum):
     @classmethod
     def _missing_(cls, value):
+        for member in cls:
+            if member.value.lower() == value.lower():
+                return member
         return cls.UNKNOWN
 
     def __format__(self, format_spec):
@@ -17,7 +20,7 @@ class Train(nsEnum):
     INTERCITY = 'Intercity'
     INTERCITY_DIRECT = 'Intercity direct'
     SPRINTER = 'Sprinter'
-    STOPTRAIN = 'stoptrein'
+    STOPTRAIN = 'Stoptrein'
     ICE_INTERNATIONAL = 'ICE International'
     THALYS = 'Thalys'
     STOPBUS = 'Stopbus i.p.v. trein'
