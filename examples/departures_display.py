@@ -18,7 +18,7 @@ color_red.setColor(QPalette.WindowText, Qt.darkRed)
 background_white = QPalette()
 background_white.setColor(QPalette.Window, Qt.white)
 background_light = QPalette()
-background_light.setColor(QPalette.Window, QColor(185, 220, 255))
+background_light.setColor(QPalette.Window, QColor(204, 230, 255))
 
 
 def big_font_label(*args, **kwargs):
