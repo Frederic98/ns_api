@@ -22,7 +22,7 @@ class Track(str):
         return self
 
     def __eq__(self, other):
-        return self.__dict__ == other.__dict__
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -83,7 +83,7 @@ class Departure:
         return self
 
     def __eq__(self, other):
-        return self.__dict__ == other.__dict__
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -147,7 +147,7 @@ class Station:
         return self.names.long
 
     def __eq__(self, other):
-        return self.__dict__ == other.__dict__
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -174,7 +174,7 @@ class Notification:
         return cls(id, serious, text)
 
     def __eq__(self, other):
-        return self.__dict__ == other.__dict__
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -217,7 +217,7 @@ class Journey:
         return self
 
     def __eq__(self, other):
-        return self.__dict__ == other.__dict__
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -247,7 +247,7 @@ class JourneyPart:
         return self
 
     def __eq__(self, other):
-        return self.__dict__ == other.__dict__
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -268,7 +268,7 @@ class JourneyStop:
         self.track = track
 
     def __eq__(self, other):
-        return self.__dict__ == other.__dict__
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
 
     def __ne__(self, other):
         return not self.__eq__(other)
