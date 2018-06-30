@@ -188,7 +188,7 @@ class DepartureDisplay(QWidget):
 if __name__ == '__main__':
     import argparse
 
-    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser = argparse.ArgumentParser(description='Run NS departures display')
     parser.add_argument('-f', action='store_true', dest='fullscreen',
                         help='run in full-screen mode')
     args = parser.parse_args()
