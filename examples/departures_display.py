@@ -1,16 +1,20 @@
 import threading
+from _weakrefset import WeakSet
 import nsapi as ns
 import pickle
 import sys
 import time
 from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QFont, QPalette, QColor, QFontMetrics
+from PyQt5.QtGui import QFont, QPalette, QColor, QFontMetrics, QResizeEvent, QKeyEvent, QCloseEvent
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel
 from PyQt5.QtWidgets import QVBoxLayout, QGridLayout
 
-big_font = QFont('Times', 15, QFont.Bold)
-small_font = QFont('Times', 10, QFont.Bold)
+big_font = QFont('Times', 40, QFont.Bold)
+small_font = QFont('Times', 25, QFont.Bold)
+big_font_metrics = QFontMetrics(big_font)
 small_font_metrics = QFontMetrics(small_font)
+big_fonts = WeakSet()
+small_fonts = WeakSet()
 color_blue = QPalette()
 color_blue.setColor(QPalette.WindowText, Qt.darkBlue)
 color_red = QPalette()
@@ -26,19 +30,21 @@ background_light.setColor(QPalette.Window, QColor(204, 230, 255))
 def big_font_label(*args, **kwargs):
     lbl = QLabel(*args, font=big_font, **kwargs)
     lbl.setPalette(color_blue)
+    big_fonts.add(lbl)
     return lbl
 
 
 def small_font_label(*args, **kwargs):
     lbl = QLabel(*args, font=small_font, **kwargs)
     lbl.setPalette(color_blue)
+    small_fonts.add(lbl)
     return lbl
 
 
 class DepartureWidget(QWidget):
     def __init__(self, departure: ns.Departure=None, index=0):
         QWidget.__init__(self)
-        self.setFixedWidth(750)
+        # self.setFixedWidth(750)
         self.departure = departure
         self.layout = QGridLayout(self)
         self.setAutoFillBackground(True)
@@ -46,15 +52,12 @@ class DepartureWidget(QWidget):
         self.canceled = False
 
         self.time = big_font_label()
-        self.time.setFixedWidth(70)
         self.delay = small_font_label()
         self.delay.setPalette(color_red)
         self.destination = big_font_label()
         self.route = small_font_label()
         self.track = big_font_label()
-        self.track.setFixedWidth(50)
         self.carrier = small_font_label()
-        self.carrier.setFixedWidth(170)
 
         self.layout.addWidget(self.time, 0, 0)
         self.layout.addWidget(self.delay, 1, 0)
@@ -102,11 +105,16 @@ class DepartureWidget(QWidget):
     def set_colorhint(self, widget: QWidget, color):
         widget.setPalette(color_gray if self.canceled else color)
 
+    def recalc_widths(self):
+        self.time.setFixedWidth(big_font_metrics.width('00:00')*1.1)
+        self.track.setFixedWidth(big_font_metrics.width('XXX')*1.1)
+        self.carrier.setFixedWidth(small_font_metrics.width('X'*12))
+
 
 class DepartureDisplay(QWidget):
     new_departures = pyqtSignal(object)
 
-    def __init__(self, api: ns.NSAPI, station: str):
+    def __init__(self, api: ns.NSAPI, station: str, fullscreen=False):
         QWidget.__init__(self)
         self.api = api
         self.station = station
@@ -116,7 +124,7 @@ class DepartureDisplay(QWidget):
         self.layout.setSpacing(0)
         self.setPalette(background_white)
 
-        self.n_departures = 10
+        self.n_departures = 8
         self.departure_widgets = []
         for n in range(self.n_departures):
             dep_widget = DepartureWidget(index=n)
@@ -124,15 +132,18 @@ class DepartureDisplay(QWidget):
             self.layout.addWidget(dep_widget)
         self.new_departures.connect(self.update_departures)
         self.departures = []
-        self.running = True
+        self.stop_event = threading.Event()
         self.update_time = 5
         threading.Thread(target=self.update_worker).start()
 
-    def closeEvent(self, ev):
-        self.running = False
+        if fullscreen:
+            self.setWindowState(Qt.WindowFullScreen)
+        else:
+            screensize = QApplication.primaryScreen().size()
+            self.resize(screensize.width()*0.7, screensize.height()*0.7)
 
     def update_worker(self):
-        while self.running:
+        while not self.stop_event.is_set():
             try:
                 departures = self.api.get_departures(self.station)[:self.n_departures]
                 departures.extend([None for n in range(self.n_departures-len(departures))])
@@ -141,19 +152,51 @@ class DepartureDisplay(QWidget):
             if departures != self.departures:
                 self.new_departures.emit(departures)
                 self.departures = departures
-            time.sleep(self.update_time)
+            self.stop_event.wait(5)
 
     def update_departures(self, departures):
         for widget, departure in zip(self.departure_widgets, departures):
             widget.update_departure(departure)
 
+    def resizeEvent(self, evnt: QResizeEvent):
+        new_width = evnt.size().width()
+        if not self.isFullScreen():
+            self.resize(new_width, 30)
+        big_font.setPointSize(new_width * 40/1920)
+        small_font.setPointSize(new_width * 25/1920)
+        global big_font_metrics
+        global small_font_metrics
+        big_font_metrics = QFontMetrics(big_font)
+        small_font_metrics = QFontMetrics(small_font)
+        for lbl in big_fonts:
+            lbl.setFont(big_font)
+        for lbl in small_fonts:
+            lbl.setFont(small_font)
+        for depw in self.departure_widgets:
+            depw.recalc_widths()
+        self.update()
+
+    def keyPressEvent(self, evnt: QKeyEvent):
+        if evnt.key() == Qt.Key_Escape:
+            self.stop_event.set()
+            QApplication.instance().exit(0)
+
+    def closeEvent(self, evnt: QCloseEvent):
+        self.stop_event.set()
+
 
 if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('-f', action='store_true', dest='fullscreen',
+                        help='run in full-screen mode')
+    args = parser.parse_args()
     app = QApplication(sys.argv)
     with open('credentials.pkl', 'rb') as f:
-        usr,pwd = pickle.load(f)
+        usr, pwd = pickle.load(f)
     api = ns.NSAPI(usr, pwd)
-    sign = DepartureDisplay(api, 'Geldermalsen')
+    sign = DepartureDisplay(api, 'Geldermalsen', args.fullscreen)
     sign.show()
     return_code = app.exec_()
     sys.exit(return_code)
