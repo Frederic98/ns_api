@@ -1,5 +1,5 @@
 import os
-import ns_api as ns
+import nsapi as ns
 import pickle
 
 STATIONS_FILE = 'stations.pkl'

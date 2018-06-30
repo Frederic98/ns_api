@@ -1,4 +1,4 @@
-import ns_api as ns
+import nsapi as ns
 import pickle
 
 DT_FORMAT = '%d-%m-%Y %H:%M'

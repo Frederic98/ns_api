@@ -1,5 +1,5 @@
 import threading
-import ns_api as ns
+import nsapi as ns
 import pickle
 import sys
 import time

@@ -1,4 +1,4 @@
-import ns_api as ns
+import nsapi as ns
 import pickle
 
 if __name__ == '__main__':
