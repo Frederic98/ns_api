@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import threading
 from _weakrefset import WeakSet
 import nsapi as ns
@@ -114,7 +115,8 @@ class DepartureWidget(QWidget):
 class DepartureDisplay(QWidget):
     new_departures = pyqtSignal(object)
 
-    def __init__(self, api: ns.NSAPI, station: str, fullscreen=False):
+    def __init__(self, api: ns.NSAPI, station: str,
+                 fullscreen=False, n_departures=8):
         QWidget.__init__(self)
         self.api = api
         self.station = station
@@ -124,7 +126,7 @@ class DepartureDisplay(QWidget):
         self.layout.setSpacing(0)
         self.setPalette(background_white)
 
-        self.n_departures = 8
+        self.n_departures = n_departures
         self.departure_widgets = []
         for n in range(self.n_departures):
             dep_widget = DepartureWidget(index=n)
@@ -191,12 +193,15 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run NS departures display')
     parser.add_argument('-f', action='store_true', dest='fullscreen',
                         help='run in full-screen mode')
+    parser.add_argument('-n', dest='n_departures', metavar='NUM', type=int, default=7,
+                        help='number of departures to display')
+    parser.add_argument('station', help='the station of which to display the departures')
     args = parser.parse_args()
     app = QApplication(sys.argv)
     with open('credentials.pkl', 'rb') as f:
         usr, pwd = pickle.load(f)
     api = ns.NSAPI(usr, pwd)
-    sign = DepartureDisplay(api, 'Geldermalsen', args.fullscreen)
+    sign = DepartureDisplay(api, args.station, args.fullscreen, args.n_departures)
     sign.show()
     return_code = app.exec_()
     sys.exit(return_code)
