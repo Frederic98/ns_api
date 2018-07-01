@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import threading
-from _weakrefset import WeakSet
+from weakref import WeakSet
 import nsapi as ns
 import pickle
 import sys
