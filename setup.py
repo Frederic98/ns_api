@@ -7,6 +7,9 @@ setup(name='nsapi',
       author='Frederic98',
       packages=['nsapi'],
       zip_safe=False,
+      install_requires=[
+            'requests',
+      ],
       extras_require={
             'departures_ui': ['PyQt5'],
       }
