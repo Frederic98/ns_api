@@ -7,7 +7,7 @@ import sys
 import time
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QFont, QPalette, QColor, QFontMetrics, QResizeEvent, QKeyEvent, QCloseEvent
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QHBoxLayout
 from PyQt5.QtWidgets import QVBoxLayout, QGridLayout
 
 big_font = QFont('Times', 40, QFont.Bold)
@@ -112,6 +112,21 @@ class DepartureWidget(QWidget):
         self.carrier.setFixedWidth(small_font_metrics.width('X'*12))
 
 
+class HeaderWidget(QWidget):
+    def __init__(self):
+        QWidget.__init__(self)
+        layout = QGridLayout(self)
+        clock = small_font_label(text='00:00')
+        destination = small_font_label(text='destination')
+        deptime = small_font_label(text='departure')
+        track = small_font_label(text='track')
+
+        layout.addWidget(clock, 0, 3)
+        layout.addWidget(deptime, 0, 0)
+        layout.addWidget(destination, 0, 1)
+        layout.addWidget(track, 0, 2)
+
+
 class DepartureDisplay(QWidget):
     new_departures = pyqtSignal(object)
 
@@ -125,6 +140,9 @@ class DepartureDisplay(QWidget):
         self.layout.setContentsMargins(0,0,0,0)
         self.layout.setSpacing(0)
         self.setPalette(background_white)
+
+        self.header_widget = HeaderWidget()
+        self.layout.addWidget(self.header_widget)
 
         self.n_departures = n_departures
         self.departure_widgets = []
