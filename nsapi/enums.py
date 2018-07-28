@@ -2,12 +2,15 @@ from enum import Enum
 
 
 class nsEnum(Enum):
-    @classmethod
-    def _missing_(cls, value):
-        for member in cls:
-            if member.value.lower() == value.lower():
-                return member
-        return cls.UNKNOWN
+    try:
+        @classmethod
+        def _missing_(cls, value):
+            for member in cls:
+                if member.value.lower() == value.lower():
+                    return member
+            return cls.UNKNOWN
+    except Exception:
+        pass
 
     def __format__(self, format_spec):
         return self.value.__format__(format_spec)

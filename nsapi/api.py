@@ -278,35 +278,44 @@ class JourneyStop:
 # NS API interface #
 ####################
 class NSAPI:
-    BASEURL = 'http://webservices.ns.nl/{}'
+    URL_BASE = 'http://webservices.ns.nl/{}'
+    URL_DEPARUTRES = 'ns-api-avt'
+    URL_PLANNER = 'ns-api-treinplanner'
+    URL_STATIONS = 'ns-api-stations-v2'
 
     def __init__(self, usr, passwd):
         self.usr = usr
         self.passwd = passwd
         self.stations = []
 
-    def request(self, url):
-        url = urljoin(self.BASEURL, url)
+    def _request(self, url):
+        url = urljoin(self.URL_BASE, url)
         resp = requests.get(url, auth=(self.usr, self.passwd))
         if resp.status_code == 400:
             raise RuntimeError('Couldn\'t authenticate at server')
         resp.encoding = 'utf-8'
-        data = ElementTree.fromstring(resp.text)
+        return resp.text
+
+    @staticmethod
+    def _parse_xml(text):
+        data = ElementTree.fromstring(text)
         if data.tag == 'error':
             raise RuntimeError(data.findtext('message'))
         return data
 
+    @staticmethod
+    def _parse_departures(tree: ElementTree):
+        return [Departure.from_xml(elem) for elem in tree]
+
     def get_departures(self, station):
-        resp = self.request('ns-api-avt?station={}'.format(station))
-        departures = []
-        for departure in resp:
-            departures.append(Departure.from_xml(departure))
-        return departures
+        resp = self._request(self.URL_DEPARUTRES+'?station={}'.format(station))
+        tree = self._parse_xml(resp)
+        return self._parse_departures(tree)
 
     def get_journey(self, from_station, to_station, via_station=None,
                     past_advices=None, next_advices=None, time=None, time_departure=True,
                     hsl_allow=True, yearcard=False):
-        url = 'ns-api-treinplanner?'
+        url = self.URL_PLANNER + '?'
         keymap = {'fromStation': from_station,
                   'toStation': to_station,
                   'viaStation': via_station,
@@ -317,7 +326,7 @@ class NSAPI:
                   'hslAllowed': hsl_allow,
                   'yearCArd': yearcard}
         url += '&'.join(['{}={}'.format(key,val) for key,val in keymap.items() if val is not None])
-        resp = self.request(url)
+        resp = self._parse_xml(self._request(url))
         options = [Journey.from_xml(option) for option in resp]
         return options
 
@@ -343,6 +352,6 @@ class NSAPI:
             pickle.dump(self.stations, f)
 
     def fetch_stations(self):
-        resp = self.request('ns-api-stations-v2')
+        resp = self._parse_xml(self._request(self.URL_STATIONS))
         self.stations.clear()
         self.stations.extend([Station.from_xml(station) for station in resp])
