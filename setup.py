@@ -12,5 +12,6 @@ setup(name='nsapi',
       ],
       extras_require={
             'departures_ui': ['PyQt5'],
+            'departures_ui_cluster': ['PyQt5', 'zeroconf'],
       }
       )
