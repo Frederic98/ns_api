@@ -11,11 +11,7 @@ class APIEndpoint:
         self.path = path
 
     def request(self, method, path, *args, **kwargs):
-        response = self.session.request(method, f'{self.path}/{path}', *args, **kwargs)
-        if not isinstance(self.session, APIEndpoint):
-            response.raise_for_status()
-            return response.json()
-        return response
+        return self.session.request(method, f'{self.path}/{path}', *args, **kwargs)
 
     def get(self, path, *args, **kwargs):
         return self.request('GET', path, *args, **kwargs)
@@ -28,6 +24,11 @@ class NSAPI(APIEndpoint):
         super().__init__(requests.Session(), 'https://gateway.apiportal.ns.nl')
         self.session.headers['Ocp-Apim-Subscription-Key'] = api_token
         self.travel_information = TravelInformationEndpoint(self)
+
+    def request(self, method, path, *args, **kwargs):
+        response = super().request(method, path, *args, **kwargs)
+        response.raise_for_status()
+        return response.json()
 
 
 class TravelInformationEndpoint(APIEndpoint):
