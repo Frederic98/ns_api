@@ -102,3 +102,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+/old
+token.txt
+autogen/*
+!autogen/*.py
+!autogen/*.json

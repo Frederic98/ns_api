@@ -1,0 +1,2707 @@
+{
+ "Arrival": {
+  "name": "Arrival",
+  "params": [
+   {
+    "name": "origin",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "name",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "plannedDateTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "plannedTimeZoneOffset",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "actualDateTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "actualTimeZoneOffset",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "plannedTrack",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "actualTrack",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "product",
+    "required": "true",
+    "type": "Product",
+    "description": ""
+   },
+   {
+    "name": "trainCategory",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "cancelled",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "journeyDetailRef",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "messages",
+    "required": "true",
+    "type": "Message[]",
+    "description": ""
+   },
+   {
+    "name": "arrivalStatus",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "ArrivalOrDeparture": {
+  "name": "ArrivalOrDeparture",
+  "params": [
+   {
+    "name": "product",
+    "required": "true",
+    "type": "Product",
+    "description": ""
+   },
+   {
+    "name": "origin",
+    "required": "false",
+    "type": "Station",
+    "description": ""
+   },
+   {
+    "name": "destination",
+    "required": "false",
+    "type": "Station",
+    "description": ""
+   },
+   {
+    "name": "plannedTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "actualTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "delayInSeconds",
+    "required": "false",
+    "type": "int64",
+    "description": ""
+   },
+   {
+    "name": "plannedTrack",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "actualTrack",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "cancelled",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "punctuality",
+    "required": "false",
+    "type": "double",
+    "description": ""
+   },
+   {
+    "name": "crowdForecast",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "shorterStockClassification",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "stockIdentifiers",
+    "required": "false",
+    "type": "string[]",
+    "description": ""
+   }
+  ]
+ },
+ "ArrivalsPayload": {
+  "name": "ArrivalsPayload",
+  "params": [
+   {
+    "name": "source",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "arrivals",
+    "required": "true",
+    "type": "Arrival[]",
+    "description": ""
+   }
+  ]
+ },
+ "CalamitiesResourceCalamity": {
+  "name": "CalamitiesResourceCalamity",
+  "params": [
+   {
+    "name": "id",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "titel",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "beschrijving",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "lastModified",
+    "required": "false",
+    "type": "int64",
+    "description": ""
+   },
+   {
+    "name": "type",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "url",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "buttonPositie",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "laatstGewijzigd",
+    "required": "false",
+    "type": "int64",
+    "description": ""
+   },
+   {
+    "name": "volgendeUpdate",
+    "required": "false",
+    "type": "int64",
+    "description": ""
+   },
+   {
+    "name": "calltoactionbuttons",
+    "required": "false",
+    "type": "CallToActionButton[]",
+    "description": ""
+   },
+   {
+    "name": "bodyitems",
+    "required": "false",
+    "type": "CalamityBodyItem[]",
+    "description": ""
+   }
+  ]
+ },
+ "CalamitiesResponse": {
+  "name": "CalamitiesResponse",
+  "params": [
+   {
+    "name": "calamiteit",
+    "required": "false",
+    "type": "CalamitiesResourceCalamity",
+    "description": ""
+   },
+   {
+    "name": "meldingen",
+    "required": "false",
+    "type": "CalamitiesResourceCalamity[]",
+    "description": ""
+   }
+  ]
+ },
+ "CalamityBodyItem": {
+  "name": "CalamityBodyItem",
+  "params": [
+   {
+    "name": "objectType",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "content",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "titel",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "downloads",
+    "required": "false",
+    "type": "Download[]",
+    "description": ""
+   },
+   {
+    "name": "links",
+    "required": "false",
+    "type": "Link[]",
+    "description": ""
+   }
+  ]
+ },
+ "CallToActionButton": {
+  "name": "CallToActionButton",
+  "params": [
+   {
+    "name": "callToAction",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "url",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "type",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "voorleestitel",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "CoachCrowdForecast": {
+  "name": "CoachCrowdForecast",
+  "params": [
+   {
+    "name": "paddingLeft",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "width",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "classification",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "Coordinate": {
+  "name": "Coordinate",
+  "params": [
+   {
+    "name": "lat",
+    "required": "true",
+    "type": "number",
+    "description": ""
+   },
+   {
+    "name": "lng",
+    "required": "true",
+    "type": "number",
+    "description": ""
+   }
+  ]
+ },
+ "Departure": {
+  "name": "Departure",
+  "params": [
+   {
+    "name": "direction",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "name",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "plannedDateTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "plannedTimeZoneOffset",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "actualDateTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "actualTimeZoneOffset",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "plannedTrack",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "actualTrack",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "product",
+    "required": "true",
+    "type": "Product",
+    "description": ""
+   },
+   {
+    "name": "trainCategory",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "cancelled",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "journeyDetailRef",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "routeStations",
+    "required": "true",
+    "type": "RouteStation[]",
+    "description": ""
+   },
+   {
+    "name": "messages",
+    "required": "true",
+    "type": "Message[]",
+    "description": ""
+   },
+   {
+    "name": "departureStatus",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "DeparturesPayload": {
+  "name": "DeparturesPayload",
+  "params": [
+   {
+    "name": "source",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "departures",
+    "required": "true",
+    "type": "Departure[]",
+    "description": ""
+   }
+  ]
+ },
+ "Download": {
+  "name": "Download",
+  "params": [
+   {
+    "name": "title",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "url",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "contentLength",
+    "required": "true",
+    "type": "int64",
+    "description": ""
+   },
+   {
+    "name": "mimeType",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "lastModified",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   }
+  ]
+ },
+ "Eco": {
+  "name": "Eco",
+  "params": [
+   {
+    "name": "co2kg",
+    "required": "true",
+    "type": "double",
+    "description": ""
+   }
+  ]
+ },
+ "EticketNotBuyableReason": {
+  "name": "EticketNotBuyableReason",
+  "params": [
+   {
+    "name": "reason",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "description",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "FareLeg": {
+  "name": "FareLeg",
+  "params": [
+   {
+    "name": "origin",
+    "required": "true",
+    "type": "TripOriginDestination",
+    "description": ""
+   },
+   {
+    "name": "destination",
+    "required": "true",
+    "type": "TripOriginDestination",
+    "description": ""
+   },
+   {
+    "name": "operator",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "productTypes",
+    "required": "true",
+    "type": "string[]",
+    "description": ""
+   },
+   {
+    "name": "fares",
+    "required": "true",
+    "type": "TripTravelFare[]",
+    "description": ""
+   }
+  ]
+ },
+ "FareLegStop": {
+  "name": "FareLegStop",
+  "params": [
+   {
+    "name": "varCode",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "name",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "FareRoute": {
+  "name": "FareRoute",
+  "params": [
+   {
+    "name": "routeId",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "origin",
+    "required": "true",
+    "type": "FareLegStop",
+    "description": ""
+   },
+   {
+    "name": "destination",
+    "required": "true",
+    "type": "FareLegStop",
+    "description": ""
+   }
+  ]
+ },
+ "InternationalPrice": {
+  "name": "InternationalPrice",
+  "params": [
+   {
+    "name": "priceInCents",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "priceInCentsExcludingSupplement",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "product",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "travelClass",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "link",
+    "required": "false",
+    "type": "uri",
+    "description": ""
+   }
+  ]
+ },
+ "Journey": {
+  "name": "Journey",
+  "params": [
+   {
+    "name": "notes",
+    "required": "true",
+    "type": "Note[]",
+    "description": ""
+   },
+   {
+    "name": "productNumbers",
+    "required": "true",
+    "type": "string[]",
+    "description": ""
+   },
+   {
+    "name": "stops",
+    "required": "true",
+    "type": "JourneyStop[]",
+    "description": ""
+   },
+   {
+    "name": "allowCrowdReporting",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "source",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "JourneyDetailLink": {
+  "name": "JourneyDetailLink",
+  "params": [
+   {
+    "name": "type",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "link",
+    "required": "true",
+    "type": "Link",
+    "description": ""
+   }
+  ]
+ },
+ "JourneyRegistrationParameters": {
+  "name": "JourneyRegistrationParameters",
+  "params": [
+   {
+    "name": "url",
+    "required": "false",
+    "type": "uri",
+    "description": ""
+   },
+   {
+    "name": "searchUrl",
+    "required": "true",
+    "type": "uri",
+    "description": ""
+   },
+   {
+    "name": "status",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "bicycleReservationRequired",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "availability",
+    "required": "false",
+    "type": "RegistrationAvailability",
+    "description": ""
+   }
+  ]
+ },
+ "JourneyStop": {
+  "name": "JourneyStop",
+  "params": [
+   {
+    "name": "id",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "stop",
+    "required": "true",
+    "type": "Station",
+    "description": ""
+   },
+   {
+    "name": "previousStopId",
+    "required": "true",
+    "type": "string[]",
+    "description": ""
+   },
+   {
+    "name": "nextStopId",
+    "required": "true",
+    "type": "string[]",
+    "description": ""
+   },
+   {
+    "name": "destination",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "status",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "kind",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "arrivals",
+    "required": "true",
+    "type": "ArrivalOrDeparture[]",
+    "description": ""
+   },
+   {
+    "name": "departures",
+    "required": "true",
+    "type": "ArrivalOrDeparture[]",
+    "description": ""
+   },
+   {
+    "name": "actualStock",
+    "required": "false",
+    "type": "Stock",
+    "description": ""
+   },
+   {
+    "name": "plannedStock",
+    "required": "false",
+    "type": "Stock",
+    "description": ""
+   },
+   {
+    "name": "platformFeatures",
+    "required": "false",
+    "type": "PlatformFeature[]",
+    "description": ""
+   },
+   {
+    "name": "coachCrowdForecast",
+    "required": "false",
+    "type": "CoachCrowdForecast[]",
+    "description": ""
+   }
+  ]
+ },
+ "Leg": {
+  "name": "Leg",
+  "params": [
+   {
+    "name": "idx",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "name",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "travelType",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "direction",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "cancelled",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "changePossible",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "alternativeTransport",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "journeyDetailRef",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "origin",
+    "required": "true",
+    "type": "TripOriginDestination",
+    "description": ""
+   },
+   {
+    "name": "destination",
+    "required": "true",
+    "type": "TripOriginDestination",
+    "description": ""
+   },
+   {
+    "name": "product",
+    "required": "false",
+    "type": "Product",
+    "description": ""
+   },
+   {
+    "name": "sharedModality",
+    "required": "false",
+    "type": "SharedModality",
+    "description": ""
+   },
+   {
+    "name": "notes",
+    "required": "false",
+    "type": "Note[]",
+    "description": ""
+   },
+   {
+    "name": "messages",
+    "required": "false",
+    "type": "Message[]",
+    "description": ""
+   },
+   {
+    "name": "stops",
+    "required": "true",
+    "type": "Stop[]",
+    "description": ""
+   },
+   {
+    "name": "steps",
+    "required": "false",
+    "type": "Step[]",
+    "description": ""
+   },
+   {
+    "name": "coordinates",
+    "required": "false",
+    "type": "array[]",
+    "description": ""
+   },
+   {
+    "name": "crowdForecast",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "punctuality",
+    "required": "false",
+    "type": "double",
+    "description": ""
+   },
+   {
+    "name": "crossPlatformTransfer",
+    "required": "false",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "shorterStock",
+    "required": "false",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "changeCouldBePossible",
+    "required": "false",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "shorterStockWarning",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "shorterStockClassification",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "journeyDetail",
+    "required": "false",
+    "type": "JourneyDetailLink[]",
+    "description": ""
+   },
+   {
+    "name": "reachable",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "plannedDurationInMinutes",
+    "required": "false",
+    "type": "int64",
+    "description": ""
+   },
+   {
+    "name": "travelAssistanceDeparture",
+    "required": "false",
+    "type": "ServiceBookingInfo",
+    "description": ""
+   },
+   {
+    "name": "travelAssistanceArrival",
+    "required": "false",
+    "type": "ServiceBookingInfo",
+    "description": ""
+   },
+   {
+    "name": "overviewPolyLine",
+    "required": "false",
+    "type": "Coordinate[]",
+    "description": ""
+   }
+  ]
+ },
+ "Link": {
+  "name": "Link",
+  "params": [
+   {
+    "name": "title",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "url",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "Location": {
+  "name": "Location",
+  "params": [
+   {
+    "name": "station",
+    "required": "true",
+    "type": "StationReference",
+    "description": "Gives information about the station the alternative transport belongs to"
+   },
+   {
+    "name": "description",
+    "required": "true",
+    "type": "string",
+    "description": "Human readable description of the location of the alternative transport"
+   }
+  ]
+ },
+ "MeetingPointDetails": {
+  "name": "MeetingPointDetails",
+  "params": [
+   {
+    "name": "name",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "minutesBefore",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   }
+  ]
+ },
+ "Message": {
+  "name": "Message",
+  "params": [
+   {
+    "name": "id",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "externalId",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "head",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "text",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "lead",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "routeIdxFrom",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "routeIdxTo",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "type",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "nesColor",
+    "required": "false",
+    "type": "NesColor",
+    "description": ""
+   },
+   {
+    "name": "startDate",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "endDate",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "startTime",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "endTime",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "NearbyMeLocationId": {
+  "name": "NearbyMeLocationId",
+  "params": [
+   {
+    "name": "value",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "type",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "NesColor": {
+  "name": "NesColor",
+  "params": [
+   {
+    "name": "type",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "color",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "Note": {
+  "name": "Note",
+  "params": [
+   {
+    "name": "value",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "key",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "noteType",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "priority",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "routeIdxFrom",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "routeIdxTo",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "link",
+    "required": "false",
+    "type": "Link",
+    "description": ""
+   },
+   {
+    "name": "isPresentationRequired",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "category",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "Part": {
+  "name": "Part",
+  "params": [
+   {
+    "name": "stockIdentifier",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "destination",
+    "required": "false",
+    "type": "Station",
+    "description": ""
+   },
+   {
+    "name": "facilities",
+    "required": "true",
+    "type": "string[]",
+    "description": ""
+   },
+   {
+    "name": "image",
+    "required": "false",
+    "type": "StockPartLink",
+    "description": ""
+   }
+  ]
+ },
+ "PlatformFeature": {
+  "name": "PlatformFeature",
+  "params": [
+   {
+    "name": "paddingLeft",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "width",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "type",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "description",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "PrimaryMessage": {
+  "name": "PrimaryMessage",
+  "params": [
+   {
+    "name": "title",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "nesColor",
+    "required": "true",
+    "type": "NesColor",
+    "description": ""
+   },
+   {
+    "name": "message",
+    "required": "false",
+    "type": "Message",
+    "description": ""
+   },
+   {
+    "name": "icon",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "Product": {
+  "name": "Product",
+  "params": [
+   {
+    "name": "number",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "categoryCode",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "shortCategoryName",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "longCategoryName",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "operatorCode",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "operatorName",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "operatorAdministrativeCode",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "type",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "displayName",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "RegistrationAvailability": {
+  "name": "RegistrationAvailability",
+  "params": [
+   {
+    "name": "seats",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "numberOfSeats",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "bicycle",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "numberOfBicyclePlaces",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   }
+  ]
+ },
+ "RepresentationResponseArrivalsPayload": {
+  "name": "RepresentationResponseArrivalsPayload",
+  "params": [
+   {
+    "name": "payload",
+    "required": "true",
+    "type": "ArrivalsPayload",
+    "description": ""
+   },
+   {
+    "name": "links",
+    "required": "false",
+    "type": "object",
+    "description": ""
+   },
+   {
+    "name": "meta",
+    "required": "false",
+    "type": "object",
+    "description": ""
+   }
+  ]
+ },
+ "RepresentationResponseDeparturesPayload": {
+  "name": "RepresentationResponseDeparturesPayload",
+  "params": [
+   {
+    "name": "payload",
+    "required": "true",
+    "type": "DeparturesPayload",
+    "description": ""
+   },
+   {
+    "name": "links",
+    "required": "false",
+    "type": "object",
+    "description": ""
+   },
+   {
+    "name": "meta",
+    "required": "false",
+    "type": "object",
+    "description": ""
+   }
+  ]
+ },
+ "RepresentationResponseInternationalPrice": {
+  "name": "RepresentationResponseInternationalPrice",
+  "params": [
+   {
+    "name": "payload",
+    "required": "true",
+    "type": "InternationalPrice",
+    "description": ""
+   },
+   {
+    "name": "links",
+    "required": "false",
+    "type": "object",
+    "description": ""
+   },
+   {
+    "name": "meta",
+    "required": "false",
+    "type": "object",
+    "description": ""
+   }
+  ]
+ },
+ "RepresentationResponseJourney": {
+  "name": "RepresentationResponseJourney",
+  "params": [
+   {
+    "name": "payload",
+    "required": "true",
+    "type": "Journey",
+    "description": ""
+   },
+   {
+    "name": "links",
+    "required": "false",
+    "type": "object",
+    "description": ""
+   },
+   {
+    "name": "meta",
+    "required": "false",
+    "type": "object",
+    "description": ""
+   }
+  ]
+ },
+ "RouteStation": {
+  "name": "RouteStation",
+  "params": [
+   {
+    "name": "uicCode",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "mediumName",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "SalesOption": {
+  "name": "SalesOption",
+  "params": [
+   {
+    "name": "type",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "permilleFullTariff",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "priceInCents",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "betterOption",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "recommendationText",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "ServiceBookingInfo": {
+  "name": "ServiceBookingInfo",
+  "params": [
+   {
+    "name": "name",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "tripLegIndex",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "stationUic",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "serviceTypeIds",
+    "required": "true",
+    "type": "string[]",
+    "description": ""
+   },
+   {
+    "name": "defaultAssistanceValue",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "canChangeAssistance",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "message",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "SharedModality": {
+  "name": "SharedModality",
+  "params": [
+   {
+    "name": "provider",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "name",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "availability",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "nearByMeMapping",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "planIcon",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "Station": {
+  "name": "Station",
+  "params": [
+   {
+    "name": "UICCode",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "stationType",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "EVACode",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "code",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "sporen",
+    "required": "true",
+    "type": "Track[]",
+    "description": ""
+   },
+   {
+    "name": "synoniemen",
+    "required": "true",
+    "type": "string[]",
+    "description": ""
+   },
+   {
+    "name": "heeftFaciliteiten",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "heeftVertrektijden",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "heeftReisassistentie",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "namen",
+    "required": "false",
+    "type": "StationsNamen",
+    "description": ""
+   },
+   {
+    "name": "land",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "lat",
+    "required": "false",
+    "type": "number",
+    "description": ""
+   },
+   {
+    "name": "lng",
+    "required": "false",
+    "type": "number",
+    "description": ""
+   },
+   {
+    "name": "radius",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "naderenRadius",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "distance",
+    "required": "false",
+    "type": "double",
+    "description": ""
+   },
+   {
+    "name": "ingangsDatum",
+    "required": "false",
+    "type": "date",
+    "description": ""
+   },
+   {
+    "name": "eindDatum",
+    "required": "false",
+    "type": "date",
+    "description": ""
+   },
+   {
+    "name": "nearbyMeLocationId",
+    "required": "false",
+    "type": "NearbyMeLocationId",
+    "description": ""
+   }
+  ]
+ },
+ "StationReference": {
+  "name": "StationReference",
+  "params": [
+   {
+    "name": "uicCode",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "stationCode",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "name",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "coordinate",
+    "required": "false",
+    "type": "Coordinate",
+    "description": ""
+   },
+   {
+    "name": "countryCode",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "StationResponse": {
+  "name": "StationResponse",
+  "params": [
+   {
+    "name": "payload",
+    "required": "true",
+    "type": "Station[]",
+    "description": ""
+   },
+   {
+    "name": "links",
+    "required": "false",
+    "type": "object",
+    "description": ""
+   },
+   {
+    "name": "meta",
+    "required": "false",
+    "type": "object",
+    "description": ""
+   }
+  ]
+ },
+ "StationsNamen": {
+  "name": "StationsNamen",
+  "params": [
+   {
+    "name": "lang",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "middel",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "kort",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "festive",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "Step": {
+  "name": "Step",
+  "params": [
+   {
+    "name": "distanceInMeters",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "durationInSeconds",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "startLocation",
+    "required": "true",
+    "type": "Location",
+    "description": "Gives more information about the location of the alternative transport"
+   },
+   {
+    "name": "endLocation",
+    "required": "true",
+    "type": "Location",
+    "description": "Gives more information about the location of the alternative transport"
+   },
+   {
+    "name": "instructions",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "Stock": {
+  "name": "Stock",
+  "params": [
+   {
+    "name": "trainType",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "numberOfSeats",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "numberOfParts",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "trainParts",
+    "required": "true",
+    "type": "Part[]",
+    "description": ""
+   },
+   {
+    "name": "hasSignificantChange",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   }
+  ]
+ },
+ "StockPartLink": {
+  "name": "StockPartLink",
+  "params": [
+   {
+    "name": "uri",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "Stop": {
+  "name": "Stop",
+  "params": [
+   {
+    "name": "uicCode",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "name",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "lat",
+    "required": "false",
+    "type": "number",
+    "description": ""
+   },
+   {
+    "name": "lng",
+    "required": "false",
+    "type": "number",
+    "description": ""
+   },
+   {
+    "name": "countryCode",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "notes",
+    "required": "true",
+    "type": "StopNote[]",
+    "description": ""
+   },
+   {
+    "name": "routeIdx",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "departurePrognosisType",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "plannedDepartureDateTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "plannedDepartureTimeZoneOffset",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "actualDepartureDateTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "actualDepartureTimeZoneOffset",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "plannedArrivalDateTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "plannedArrivalTimeZoneOffset",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "actualArrivalDateTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "actualArrivalTimeZoneOffset",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "plannedPassingDateTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "actualPassingDateTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "arrivalPrognosisType",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "actualDepartureTrack",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "plannedDepartureTrack",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "plannedArrivalTrack",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "actualArrivalTrack",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "departureDelayInSeconds",
+    "required": "false",
+    "type": "int64",
+    "description": ""
+   },
+   {
+    "name": "arrivalDelayInSeconds",
+    "required": "false",
+    "type": "int64",
+    "description": ""
+   },
+   {
+    "name": "cancelled",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "borderStop",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "passing",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "quayCode",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "StopNote": {
+  "name": "StopNote",
+  "params": [
+   {
+    "name": "value",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "key",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "type",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "priority",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   }
+  ]
+ },
+ "Track": {
+  "name": "Track",
+  "params": [
+   {
+    "name": "spoorNummer",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "TravelAdvice": {
+  "name": "TravelAdvice",
+  "params": [
+   {
+    "name": "source",
+    "required": "true",
+    "type": "string",
+    "description": "Source system that has generated these travel advices"
+   },
+   {
+    "name": "trips",
+    "required": "true",
+    "type": "Trip[]",
+    "description": "List of trips"
+   },
+   {
+    "name": "scrollRequestBackwardContext",
+    "required": "false",
+    "type": "string",
+    "description": "Scroll context to use when scrolling back in time. Can be used in scrollContext query parameter"
+   },
+   {
+    "name": "scrollRequestForwardContext",
+    "required": "false",
+    "type": "string",
+    "description": "Scroll context to use when scrolling forward in time. Can be used in scrollContext query parameter"
+   },
+   {
+    "name": "message",
+    "required": "false",
+    "type": "string",
+    "description": "Optional message indicating why the list of trips is empty."
+   }
+  ]
+ },
+ "TravelAssistanceInfo": {
+  "name": "TravelAssistanceInfo",
+  "params": [
+   {
+    "name": "termsAndConditionsLink",
+    "required": "false",
+    "type": "url",
+    "description": ""
+   },
+   {
+    "name": "tripRequestId",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "isAssistanceRequired",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   }
+  ]
+ },
+ "Trip": {
+  "name": "Trip",
+  "params": [
+   {
+    "name": "uid",
+    "required": "true",
+    "type": "string",
+    "description": "Unique identifier for this trip"
+   },
+   {
+    "name": "ctxRecon",
+    "required": "true",
+    "type": "string",
+    "description": "Reconstruction context for this trip. Can be used to reconstruct this exact trip with the v3/trips/trip endpoint"
+   },
+   {
+    "name": "plannedDurationInMinutes",
+    "required": "false",
+    "type": "int64",
+    "description": "Planned duration of this trip in minutes"
+   },
+   {
+    "name": "actualDurationInMinutes",
+    "required": "false",
+    "type": "int64",
+    "description": "Actual duration of this trip in minutes, or the planned duration if no realtime information about this trip is available."
+   },
+   {
+    "name": "transfers",
+    "required": "true",
+    "type": "int32",
+    "description": "Number of public transit transfers"
+   },
+   {
+    "name": "status",
+    "required": "true",
+    "type": "string",
+    "description": "Status of this trip"
+   },
+   {
+    "name": "primaryMessage",
+    "required": "false",
+    "type": "PrimaryMessage",
+    "description": "Most important message to display"
+   },
+   {
+    "name": "messages",
+    "required": "false",
+    "type": "Message[]",
+    "description": "List of messages regarding maintenance or disruption that influences this trip."
+   },
+   {
+    "name": "legs",
+    "required": "true",
+    "type": "Leg[]",
+    "description": ""
+   },
+   {
+    "name": "overviewPolyLine",
+    "required": "false",
+    "type": "Coordinate[]",
+    "description": ""
+   },
+   {
+    "name": "crowdForecast",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "punctuality",
+    "required": "false",
+    "type": "double",
+    "description": ""
+   },
+   {
+    "name": "optimal",
+    "required": "true",
+    "type": "boolean",
+    "description": "Whether or not this trip is regarded the best possible option of all returned trips"
+   },
+   {
+    "name": "fareRoute",
+    "required": "false",
+    "type": "FareRoute",
+    "description": ""
+   },
+   {
+    "name": "fares",
+    "required": "false",
+    "type": "TripSalesFare[]",
+    "description": ""
+   },
+   {
+    "name": "fareLegs",
+    "required": "false",
+    "type": "FareLeg[]",
+    "description": ""
+   },
+   {
+    "name": "productFare",
+    "required": "false",
+    "type": "TripTravelFare",
+    "description": ""
+   },
+   {
+    "name": "fareOptions",
+    "required": "false",
+    "type": "TripFareOptions",
+    "description": ""
+   },
+   {
+    "name": "bookingUrl",
+    "required": "false",
+    "type": "Link",
+    "description": ""
+   },
+   {
+    "name": "type",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "shareUrl",
+    "required": "false",
+    "type": "Link",
+    "description": ""
+   },
+   {
+    "name": "realtime",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "travelAssistanceInfo",
+    "required": "false",
+    "type": "TravelAssistanceInfo",
+    "description": ""
+   },
+   {
+    "name": "routeId",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "registerJourney",
+    "required": "false",
+    "type": "JourneyRegistrationParameters",
+    "description": ""
+   },
+   {
+    "name": "eco",
+    "required": "false",
+    "type": "Eco",
+    "description": ""
+   }
+  ]
+ },
+ "TripFareOptions": {
+  "name": "TripFareOptions",
+  "params": [
+   {
+    "name": "isInternationalBookable",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "isInternational",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "isEticketBuyable",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "isPossibleWithOvChipkaart",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "isTotalPriceUnknown",
+    "required": "true",
+    "type": "boolean",
+    "description": ""
+   },
+   {
+    "name": "supplementsBasedOnSelectedFare",
+    "required": "false",
+    "type": "TripFareSupplement[]",
+    "description": ""
+   },
+   {
+    "name": "reasonEticketNotBuyable",
+    "required": "false",
+    "type": "EticketNotBuyableReason",
+    "description": ""
+   },
+   {
+    "name": "salesOptions",
+    "required": "false",
+    "type": "SalesOption[]",
+    "description": ""
+   }
+  ]
+ },
+ "TripFareSupplement": {
+  "name": "TripFareSupplement",
+  "params": [
+   {
+    "name": "supplementPriceInCents",
+    "required": "true",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "legIdx",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "fromUICCode",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "toUICCode",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "link",
+    "required": "false",
+    "type": "Link",
+    "description": ""
+   }
+  ]
+ },
+ "TripOriginDestination": {
+  "name": "TripOriginDestination",
+  "params": [
+   {
+    "name": "name",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "lng",
+    "required": "false",
+    "type": "number",
+    "description": ""
+   },
+   {
+    "name": "lat",
+    "required": "false",
+    "type": "number",
+    "description": ""
+   },
+   {
+    "name": "city",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "countryCode",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "uicCode",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "type",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "prognosisType",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "plannedTimeZoneOffset",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "plannedDateTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "actualTimeZoneOffset",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "actualDateTime",
+    "required": "false",
+    "type": "date-time",
+    "description": ""
+   },
+   {
+    "name": "plannedTrack",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "actualTrack",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "exitSide",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "checkinStatus",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "travelAssistanceBookingInfo",
+    "required": "false",
+    "type": "ServiceBookingInfo",
+    "description": ""
+   },
+   {
+    "name": "travelAssistanceMeetingPoints",
+    "required": "false",
+    "type": "string[]",
+    "description": ""
+   },
+   {
+    "name": "travelAssistanceMeetingPointDetails",
+    "required": "false",
+    "type": "MeetingPointDetails[]",
+    "description": ""
+   },
+   {
+    "name": "notes",
+    "required": "false",
+    "type": "Note[]",
+    "description": ""
+   },
+   {
+    "name": "quayCode",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "TripSalesFare": {
+  "name": "TripSalesFare",
+  "params": [
+   {
+    "name": "priceInCents",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "product",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "travelClass",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "priceInCentsExcludingSupplement",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "discountType",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "supplementInCents",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "link",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ },
+ "TripTravelFare": {
+  "name": "TripTravelFare",
+  "params": [
+   {
+    "name": "priceInCents",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "priceInCentsExcludingSupplement",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "supplementInCents",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "buyableTicketPriceInCents",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "buyableTicketPriceInCentsExcludingSupplement",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "buyableTicketSupplementPriceInCents",
+    "required": "false",
+    "type": "int32",
+    "description": ""
+   },
+   {
+    "name": "product",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "travelClass",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "discountType",
+    "required": "true",
+    "type": "string",
+    "description": ""
+   },
+   {
+    "name": "link",
+    "required": "false",
+    "type": "string",
+    "description": ""
+   }
+  ]
+ }
+}
