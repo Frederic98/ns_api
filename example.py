@@ -40,8 +40,8 @@ print()
 journey = api.travel_information.journey(journey_id=trip.legs[0].journeyDetailRef).payload
 print(journey.stops[0].plannedStock.trainType)
 print(f'{journey.stops[0].stop.namen.lang} - {journey.stops[-1].stop.namen.lang}')
-for station in journey.stops:
-    print(f'|{"->" if station.status != "PASSING" else "  "} {station.stop.namen.lang}')
+for stop in journey.stops:
+    print(f'|{"->" if stop.status != "PASSING" else "  "} {stop.stop.namen.lang}')
 print()
 
 # Get arrivals on station
